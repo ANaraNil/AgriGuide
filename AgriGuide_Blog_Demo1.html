@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriGuide - Environmental Insights</title>
+    <style>
+        :root {
+            --primary-green: #4a8f29;
+            --secondary-green: #6bbd46;
+            --light-green: #e8f5e9;
+            --dark-green: #2e5721;
+            --white: #ffffff;
+            --black: #333333;
+            --gray: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light-green);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(74, 143, 41, 0.8), rgba(74, 143, 41, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-green);
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--light-green);
+            transform: translateY(-3px);
+        }
+        
+        .blog-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-green);
+            margin: 0.5rem auto 0;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-date {
+            color: var(--secondary-green);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-green);
+        }
+        
+        .blog-excerpt {
+            color: var(--black);
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .newsletter {
+            background-color: var(--light-green);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 1rem;
+            color: var(--dark-green);
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--dark-green);
+        }
+        
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .newsletter-form button {
+                border-radius: 5px;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">AgriGuide</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="crops.html">Crops</a></li>
+                    <li><a href="techniques.html">Techniques</a></li>
+                    <li><a href="environment.html">Environment</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Sustainable Agriculture for a Healthier Planet</h1>
+            <p>Discover how to protect your soil, conserve water, and use organic solutions for pest control while maintaining high yields.</p>
+            <a href="#blog" class="btn">Read Our Latest Articles</a>
+        </div>
+    </section>
+    
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title">Environmental Blog</h2>
+            <div class="blog-grid">
+                <!-- Soil Pollution Article -->
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce" alt="Soil pollution">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">Combatting Soil Pollution: Sustainable Practices for Farmers</h3>
+                        <p class="blog-excerpt">Learn about the major causes of soil degradation and practical methods to restore soil health through organic amendments and crop rotation techniques.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <!-- Water Pollution Article -->
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35" alt="Water pollution">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">Protecting Our Waterways: Reducing Agricultural Runoff</h3>
+                        <p class="blog-excerpt">Discover how buffer strips, constructed wetlands, and precision irrigation can minimize fertilizer and pesticide runoff into rivers and lakes.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <!-- Organic Pesticides Article -->
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1585494185610-451a0b52667a" alt="Organic pesticides">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">Effective Organic Pesticides: Recipes That Really Work</h3>
+                        <p class="blog-excerpt">Explore homemade organic pesticide formulations using neem oil, garlic, chili peppers, and other natural ingredients to protect your crops safely.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <!-- Additional Articles -->
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce" alt="Composting">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">From Waste to Resource: Advanced Composting Techniques</h3>
+                        <p class="blog-excerpt">Turn agricultural waste into nutrient-rich compost with these innovative methods that accelerate decomposition and improve quality.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1531512073830-ba890ca4eba2" alt="Cover crops">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">The Power of Cover Crops: Soil Protection Between Seasons</h3>
+                        <p class="blog-excerpt">How strategically planted cover crops can prevent erosion, suppress weeds, and fix nitrogen in your soil during off-seasons.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae" alt="Biodiversity">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">26 March 2025</div>
+                        <h3 class="blog-title">Boosting Farm Biodiversity: Natural Pest Control Solutions</h3>
+                        <p class="blog-excerpt">Creating habitats for beneficial insects, birds, and other wildlife that naturally control pest populations without chemicals.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated with AgriGuide</h2>
+            <p>Subscribe to our newsletter for the latest articles on sustainable farming practices, environmental protection, and organic agriculture.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2025 AgriGuide. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome for icons (would need to be added in real implementation) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
